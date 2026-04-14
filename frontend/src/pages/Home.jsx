@@ -35,6 +35,7 @@ const Home = () => {
         <div className="flex flex-col">
             {/* Hero Section */}
             <section className="relative bg-ex-navy py-12 lg:py-24 overflow-hidden">
+
                 <ParticleBackground />
                 
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center">
@@ -120,7 +121,8 @@ const Home = () => {
             <section className="py-16 bg-gray-100 border-t border-gray-200">
                 <div className="max-w-7xl mx-auto px-4 text-center">
                     <h2 className="text-2xl font-bold mb-8">{t('home.helplineTitle')}</h2>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+
                         <div className="bg-white p-4 rounded-lg shadow-sm">
                             <div className="font-bold text-ex-navy flex items-center justify-center mb-1"><Phone className="h-4 w-4 mr-1"/> {t('home.lokpal')}</div>
                             <div className="text-ex-cyan font-bold text-lg">1800-180-5656</div>
@@ -143,5 +145,5 @@ const Home = () => {
     );
 };
 
-
 export default Home;
+

@@ -239,8 +239,9 @@ ${guidedAnswers.proof || 'None mentioned at this stage'}`;
     }
 
     return (
-        <div className="max-w-4xl mx-auto py-12 px-4 sm:px-6">
-            <div className="glass-card p-8 min-h-[600px] flex flex-col border border-gray-200">
+        <div className="max-w-4xl mx-auto py-6 lg:py-12 px-2 sm:px-6">
+            <div className="glass-card p-4 sm:p-8 min-h-[600px] flex flex-col border border-gray-200">
+
                 
                 {/* Header & Progress */}
                 <div className="mb-8">
@@ -262,7 +263,8 @@ ${guidedAnswers.proof || 'None mentioned at this stage'}`;
                     {/* STEP 1: The Incident */}
                     {step === 1 && (
                         <div className="animate-fade-in-up flex-grow">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6">
+
                                 <div>
                                     <label className="block text-sm font-bold text-gray-700 mb-1">{t('report.category')}</label>
                                     <select {...register("category", { required: true })} className="input-field">
@@ -304,7 +306,8 @@ ${guidedAnswers.proof || 'None mentioned at this stage'}`;
                                         <label className="block text-sm font-bold text-blue-900 mb-1">{t('report.incWhat')} <span className="text-red-500">*</span></label>
                                         <textarea value={guidedAnswers.what} onChange={e => setGuidedAnswers({...guidedAnswers, what: e.target.value})} rows="2" className="input-field bg-white border-blue-200 focus:border-blue-500 focus:ring-blue-500" placeholder={t('report.placeholderWhat')} />
                                     </div>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-10">
+
                                         <div>
                                             <label className="block text-sm font-bold text-blue-900 mb-1">{t('report.incWhere')}</label>
                                             <input type="text" value={guidedAnswers.where} onChange={e => setGuidedAnswers({...guidedAnswers, where: e.target.value})} className="input-field bg-white border-blue-200 focus:border-blue-500 focus:ring-blue-500" placeholder={t('report.placeholderWhere')} />
@@ -314,7 +317,8 @@ ${guidedAnswers.proof || 'None mentioned at this stage'}`;
                                             <input type="text" value={guidedAnswers.when} onChange={e => setGuidedAnswers({...guidedAnswers, when: e.target.value})} className="input-field bg-white border-blue-200 focus:border-blue-500 focus:ring-blue-500" placeholder={t('report.placeholderWhen')} />
                                         </div>
                                     </div>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-10">
+
                                         <div>
                                             <label className="block text-sm font-bold text-blue-900 mb-1">{t('report.incWho')}</label>
                                             <input type="text" value={guidedAnswers.who} onChange={e => setGuidedAnswers({...guidedAnswers, who: e.target.value})} className="input-field bg-white border-blue-200 focus:border-blue-500 focus:ring-blue-500" placeholder={t('report.placeholderWho')} />
