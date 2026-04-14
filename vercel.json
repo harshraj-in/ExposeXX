@@ -1,21 +1,19 @@
 {
   "version": 2,
-  "functions": {
-    "backend/server.js": {
-      "runtime": "@vercel/node"
-    }
-  },
+  "buildCommand": "npm run build",
+  "outputDirectory": "frontend/dist",
+  "cleanUrls": true,
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/backend/server.js"
+      "destination": "backend/server.js"
     },
     {
       "source": "/uploads/(.*)",
-      "destination": "/backend/server.js"
+      "destination": "backend/server.js"
     },
     {
-      "source": "/((?!api|uploads|assets|.*\\..*).*)",
+      "source": "/((?!api|uploads|assets|test.html|.*\\..*).*)",
       "destination": "/index.html"
     }
   ]
