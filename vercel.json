@@ -1,7 +1,5 @@
 {
   "version": 2,
-  "buildCommand": "npm run build",
-  "outputDirectory": "frontend/dist",
   "functions": {
     "backend/server.js": {
       "runtime": "@vercel/node"
@@ -17,11 +15,7 @@
       "destination": "/backend/server.js"
     },
     {
-      "source": "/assets/(.*)",
-      "destination": "/assets/$1"
-    },
-    {
-      "source": "/(.*)",
+      "source": "/((?!api|uploads|assets|.*\\..*).*)",
       "destination": "/index.html"
     }
   ]
