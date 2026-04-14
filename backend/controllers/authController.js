@@ -40,8 +40,10 @@ export const authUser = async (req, res) => {
       res.status(401).json({ message: 'Invalid email or password' });
     }
   } catch (error) {
+    console.error(`[AUTH ERROR] ${error.stack}`);
     res.status(500).json({ message: 'Failed to authenticate user', error: error.message });
   }
+
 };
 
 // @desc    Register a new user (Citizen) or privileged accounts (if Admin)
