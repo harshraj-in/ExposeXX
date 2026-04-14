@@ -84,19 +84,19 @@ const limiter = rateLimit({
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 });
 
-app.use('/api', limiter);
+app.use('/', limiter);
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
 // Routes
-app.use('/api/reports', reportRoutes);
-app.use('/api/auth', authRoutes);
-app.use('/api/ai', aiRoutes);
-app.use('/api/safe-messages', safeMessageRoutes);
-app.use('/api/analytics', analyticsRoutes);
-app.use('/api/rewards', rewardRoutes);
+app.use('/reports', reportRoutes);
+app.use('/auth', authRoutes);
+app.use('/ai', aiRoutes);
+app.use('/safe-messages', safeMessageRoutes);
+app.use('/analytics', analyticsRoutes);
+app.use('/rewards', rewardRoutes);
 
-app.get('/api/health', (req, res) => {
+app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
@@ -104,13 +104,9 @@ app.get('/api/health', (req, res) => {
 const frontendPath = path.join(__dirname, '../frontend/dist');
 app.use(express.static(frontendPath));
 
-// SPA Routing - Serve index.html for all non-API routes
+// SPA Routing - Not needed for Vercel Services because Vercel routes the frontend service separately
 app.get('*', (req, res) => {
-  if (req.url.startsWith('/api')) {
-    return res.status(404).json({ success: false, message: 'API route not found' });
-  }
-  // Optional: check if file exists
-  res.sendFile(path.join(frontendPath, 'index.html'));
+  res.status(404).json({ success: false, message: 'Backend route not found' });
 });
 
 

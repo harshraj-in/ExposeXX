@@ -8,10 +8,11 @@ export default defineConfig({
     port: 5174,
     strictPort: false, // fall back to next available port if taken
     proxy: {
-      '/api': {
+      '/_/backend': {
         target: 'http://localhost:5000',
         changeOrigin: true,
-        secure: false
+        secure: false,
+        rewrite: (path) => path.replace(/^\/_\/backend/, '')
       }
     }
   }
