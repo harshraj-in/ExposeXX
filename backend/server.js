@@ -76,33 +76,40 @@ const limiter = rateLimit({
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 });
 
-app.use('/api', limiter);
+// On Vercel with experimentalServices, the /api prefix is stripped by the platform.
+// Locally, the frontend proxy sends requests to /api/..., so we need the prefix.
+const apiPrefix = process.env.VERCEL ? '' : '/api';
+
+app.use(apiPrefix || '/', limiter);
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
 // Routes
-app.use('/api/reports', reportRoutes);
-app.use('/api/auth', authRoutes);
-app.use('/api/ai', aiRoutes);
-app.use('/api/safe-messages', safeMessageRoutes);
-app.use('/api/analytics', analyticsRoutes);
-app.use('/api/rewards', rewardRoutes);
+app.use(`${apiPrefix}/reports`, reportRoutes);
+app.use(`${apiPrefix}/auth`, authRoutes);
+app.use(`${apiPrefix}/ai`, aiRoutes);
+app.use(`${apiPrefix}/safe-messages`, safeMessageRoutes);
+app.use(`${apiPrefix}/analytics`, analyticsRoutes);
+app.use(`${apiPrefix}/rewards`, rewardRoutes);
 
-app.get('/api/health', (req, res) => {
+app.get(`${apiPrefix}/health`, (req, res) => {
   res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-// Serve Static Frontend Assets
-const frontendPath = path.join(__dirname, '../frontend/dist');
-app.use(express.static(frontendPath));
+// Serve Static Frontend Assets (only when running locally, not on Vercel)
+if (!process.env.VERCEL) {
+  const frontendPath = path.join(__dirname, '../frontend/dist');
+  app.use(express.static(frontendPath));
 
-// SPA Routing - Serve index.html for all non-API routes
-app.get('*', (req, res) => {
-  if (req.url.startsWith('/api')) {
-    return res.status(404).json({ success: false, message: 'API route not found' });
-  }
-  res.sendFile(path.join(frontendPath, 'index.html'));
-});
+  // SPA Routing - Serve index.html for all non-API routes
+  app.get('*', (req, res) => {
+    if (req.url.startsWith('/api')) {
+      return res.status(404).json({ success: false, message: 'API route not found' });
+    }
+    res.sendFile(path.join(frontendPath, 'index.html'));
+  });
+}
+
 
 
 // Global Error Handler
