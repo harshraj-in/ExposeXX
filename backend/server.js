@@ -55,15 +55,23 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: (origin, callback) => {
-    // Allow requests with no origin (like Postman/curl) or from allowed list
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error(`CORS policy: Origin ${origin} not allowed`));
+    // 1. Allow no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true);
+
+    // 2. Allow specific local dev origins
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+
+    // 3. Automatically allow any Vercel deployment URL
+    if (origin.endsWith('.vercel.app') || origin.endsWith('.now.sh')) {
+      return callback(null, true);
     }
+
+    // 4. Fallback: Disallow
+    callback(null, false);
   },
   credentials: true
 }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
