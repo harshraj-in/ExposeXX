@@ -61,8 +61,8 @@ app.use(cors({
     // 2. Allow specific local dev origins
     if (allowedOrigins.includes(origin)) return callback(null, true);
 
-    // 3. Automatically allow any Vercel deployment URL
-    if (origin.endsWith('.vercel.app') || origin.endsWith('.now.sh')) {
+    // 3. Automatically allow any Vercel or Netlify deployment URL
+    if (origin.endsWith('.vercel.app') || origin.endsWith('.now.sh') || origin.endsWith('.netlify.app')) {
       return callback(null, true);
     }
 
