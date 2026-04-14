@@ -61,8 +61,8 @@ app.use(cors({
     // 2. Allow specific local dev origins
     if (allowedOrigins.includes(origin)) return callback(null, true);
 
-    // 3. Automatically allow any Vercel or Netlify deployment URL
-    if (origin.endsWith('.vercel.app') || origin.endsWith('.now.sh') || origin.endsWith('.netlify.app')) {
+    // 3. Automatically allow any Vercel, Netlify or Render deployment URL
+    if (origin.endsWith('.vercel.app') || origin.endsWith('.now.sh') || origin.endsWith('.netlify.app') || origin.endsWith('.onrender.com')) {
       return callback(null, true);
     }
 
