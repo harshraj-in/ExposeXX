@@ -2,7 +2,7 @@ import axios from 'axios';
 import useStore from '../store/useStore';
 
 const apiClient = axios.create({
-  baseURL: '/_/backend',
+  baseURL: import.meta.env.VITE_API_BASE_URL || '/api',
 });
 
 // Interceptor to add auth token
