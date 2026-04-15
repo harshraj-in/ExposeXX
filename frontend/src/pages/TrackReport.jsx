@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import axios from 'axios';
+import apiClient from '../api/apiClient';
 import apiClient from '../api/apiClient';
 import { Search, Loader2, Calendar, FileText, AlertTriangle, MessageSquare, Shield, Send, X } from 'lucide-react';
 import StatusBadge from '../components/StatusBadge';
@@ -40,7 +40,7 @@ const TrackReport = () => {
         setLoading(true);
         setError('');
         try {
-            const res = await axios.get(`/api/reports/${reportId}`);
+            const res = await apiClient.get(`/reports/${reportId}`);
             setReport(res.data);
             // Auto-open chat if navigated from citizen dashboard
             if (shouldOpenChat) {
@@ -104,7 +104,7 @@ const TrackReport = () => {
         } catch (err) {
             // If not logged in, fall back to safe-messages route
             try {
-                const fallback = await axios.post(`/api/safe-messages/${report.reportId}`, { message: newMessage });
+                const fallback = await apiClient.post(`/safe-messages/${report.reportId}`, { message: newMessage });
                 setMessages(prev => [...prev, { sender: 'user', message: newMessage, timestamp: new Date() }]);
                 setNewMessage('');
                 toast.success(t('track.messageSent'));

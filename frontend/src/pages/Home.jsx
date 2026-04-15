@@ -1,6 +1,6 @@
 import { ArrowRight, ShieldAlert, CheckCircle, TrendingUp, Search, Phone, Activity, Map } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import apiClient from '../api/apiClient';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import ParticleBackground from '../components/ParticleBackground';
@@ -20,7 +20,7 @@ const Home = () => {
     useEffect(() => {
         const fetchPulse = async () => {
             try {
-                const res = await axios.get('/api/reports/pulse');
+                const res = await apiClient.get('/reports/pulse');
                 setPulse(res.data);
             } catch (err) {
                 console.error("Pulse error:", err);

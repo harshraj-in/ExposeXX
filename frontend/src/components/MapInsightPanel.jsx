@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { AlertCircle, Bot, Flame, Activity, Loader2, Building2, Filter, Menu, X, Globe2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import axios from 'axios';
+import apiClient from '../api/apiClient';
 
 export default function MapInsightPanel({ onFilterChange }) {
     const { t } = useTranslation();
@@ -16,9 +16,9 @@ export default function MapInsightPanel({ onFilterChange }) {
         const fetchAnalytics = async () => {
             try {
                 const [insightRes, indexRes, trendRes] = await Promise.all([
-                    axios.get('/api/analytics/insights'),
-                    axios.get('/api/analytics/index'),
-                    axios.get('/api/analytics/trends')
+                    apiClient.get('/analytics/insights'),
+                    apiClient.get('/analytics/index'),
+                    apiClient.get('/analytics/trends')
                 ]);
                 setInsights(insightRes.data.insights || []);
                 

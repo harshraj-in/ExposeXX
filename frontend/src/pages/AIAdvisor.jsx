@@ -23,7 +23,7 @@ const AIAdvisor = () => {
 
         const fetchSuggestion = async () => {
             try {
-                const res = await axios.post('/api/ai/suggest', { reportId });
+                const res = await apiClient.post('/ai/suggest', { reportId });
                 if (res.data.success) {
                     setSuggestion(res.data.aiSuggestion);
                 }
@@ -48,7 +48,7 @@ const AIAdvisor = () => {
     const handleGenerateRTI = async () => {
         setRtiLoading(true);
         try {
-            const res = await axios.post('/api/ai/generate-rti', { reportId });
+            const res = await apiClient.post('/ai/generate-rti', { reportId });
             if (res.data.success) {
                 setRtiLetter(res.data.rtiLetter);
             }

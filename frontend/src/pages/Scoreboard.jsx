@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import apiClient from '../api/apiClient';
 import { Trophy, Activity, AlertTriangle, ShieldCheck } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
@@ -13,7 +13,7 @@ const Scoreboard = () => {
     useEffect(() => {
         const fetchAndCalculate = async () => {
             try {
-                const res = await axios.get('/api/reports/map-data');
+                const res = await apiClient.get('/reports/map-data');
                 const reports = res.data;
 
                 // Group by state

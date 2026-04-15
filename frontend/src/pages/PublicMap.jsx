@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
-import axios from 'axios';
+import apiClient from '../api/apiClient';
 import { Loader2 } from 'lucide-react';
 import { format } from 'date-fns';
 import { useTranslation } from 'react-i18next';
@@ -52,7 +52,7 @@ export default function PublicMap() {
         const fetchHeatmap = async () => {
             setLoading(true);
             try {
-                const res = await axios.get(`/api/analytics/heatmap?timeframe=${timeframe}`);
+                const res = await apiClient.get(`/analytics/heatmap?timeframe=${timeframe}`);
                 if (res.data.success) {
                     setHeatmapData(res.data.points || []);
                 }
