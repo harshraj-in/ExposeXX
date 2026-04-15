@@ -181,7 +181,7 @@ const CaseInvestigationModal = ({ reportId, onClose, onUpdate, userMode = false 
                                         let finalUrl = cleanUrl;
                                         if (isLocal) {
                                             const pathPrefix = cleanUrl.startsWith('/') ? '' : '/';
-                                            finalUrl = `http://localhost:5000${pathPrefix}${cleanUrl}`;
+                                            finalUrl = `https://exposexx-1.onrender.com${pathPrefix}${cleanUrl}`;
                                         }
 
                                         return (

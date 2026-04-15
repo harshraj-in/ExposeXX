@@ -2,7 +2,7 @@ import axios from 'axios';
 import useStore from '../store/useStore';
 
 const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || 'https://exposex-backend.onrender.com/api',
+  baseURL: import.meta.env.VITE_API_BASE_URL || 'https://exposexx-1.onrender.com/api',
 });
 
 // Interceptor to add auth token
