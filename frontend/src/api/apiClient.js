@@ -1,21 +1,12 @@
-import axios from 'axios';
-import useStore from '../store/useStore';
+// Storage-only stub — no longer uses axios or any backend
+// This file is kept to avoid breaking any stale imports during transition.
+// All data now comes from ../storage.js
 
-const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || 'https://exposexx-1.onrender.com/api',
-});
-
-// Interceptor to add auth token
-apiClient.interceptors.request.use(
-  (config) => {
-    // We cannot directly use hooks here, get state from store
-    const user = useStore.getState().user;
-    if (user && user.token) {
-      config.headers.Authorization = `Bearer ${user.token}`;
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
+const apiClient = {
+  get: () => Promise.reject(new Error('apiClient is disabled — use storage.js')),
+  post: () => Promise.reject(new Error('apiClient is disabled — use storage.js')),
+  patch: () => Promise.reject(new Error('apiClient is disabled — use storage.js')),
+  put: () => Promise.reject(new Error('apiClient is disabled — use storage.js')),
+};
 
 export default apiClient;

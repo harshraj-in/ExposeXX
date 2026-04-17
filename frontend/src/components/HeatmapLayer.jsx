@@ -18,15 +18,14 @@ export default function HeatmapLayer({ points }) {
         const mapMax = Math.min(dataMax, 5.0); // Make it easier to hit the 'Red' state
 
         const heatLayer = L.heatLayer(heatPoints, {
-            radius: 45, // Increased radius for better regional overlap
-            blur: 35, // Softer blur for wider area glow
+            radius: 30, // Precise radius
+            blur: 20, // Clean blur for hotspots
             maxZoom: 15,
             max: mapMax, 
             gradient: {
-                0.2: '#22c55e', // Green (Low)
-                0.5: '#eab308', // Yellow (Moderate)
-                0.7: '#f97316', // Orange (High)
-                1.0: '#ef4444'  // Red (Severe)
+                0.4: '#eab308', // Yellow (Low)
+                0.7: '#f97316', // Orange (Moderate)
+                1.0: '#dc2626'  // Red-Orange (High)
             }
         }).addTo(map);
 

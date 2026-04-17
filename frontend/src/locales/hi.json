@@ -8,7 +8,12 @@
         "logout": "लॉग आउट",
         "adminLogin": "एडमिन लॉग इन",
         "home": "होम",
-        "scoreboard": "स्कोरबोर्ड"
+        "scoreboard": "स्कोरबोर्ड",
+        "switchLanguage": "भाषा बदलें ({{lang}})",
+        "lightMode": "लाइट मोड",
+        "darkMode": "डार्क मोड",
+        "ngoPortal": "एनजीओ पोर्टल",
+        "toggleTheme": "थीम बदलें"
     },
     "home": {
         "heroTitle": "भ्रष्टाचार से लड़ें।",
@@ -33,7 +38,28 @@
         "lokpal": "लोकपाल",
         "cbi": "सीबीआई भ्रष्टाचार निरोधक",
         "pmoPortal": "केंद्रीय पीएमओ पोर्टल",
-        "rtiPortal": "आरटीआई पोर्टल"
+        "rtiPortal": "आरटीआई पोर्टल",
+        "featuresTitle": "भ्रष्टाचार से लड़ने के लिए आपको जो कुछ भी चाहिए",
+        "featAnonTitle": "गुमनाम रिपोर्टिंग",
+        "featAnonDesc": "बिना अपनी पहचान बताए शिकायत दर्ज करें।",
+        "featLegalTitle": "एआई कानूनी सलाहकार",
+        "featLegalDesc": "अपने मामले के लिए तुरंत आईपीसी धाराएं और कानूनी कदम प्राप्त करें।",
+        "featEvidenceTitle": "फेस ब्लर के साथ साक्ष्य",
+        "featEvidenceDesc": "स्वचालित फेस सुरक्षा के साथ फोटो/वीडियो प्रमाण अपलोड करें।",
+        "featTrackTitle": "वास्तविक समय ट्रैकिंग",
+        "featTrackDesc": "यूनिक रिपोर्ट आईडी के साथ अपनी शिकायत की स्थिति ट्रैक करें।",
+        "featSafeRoomTitle": "सुरक्षित सेफ रूम चैट",
+        "featSafeRoomDesc": "गुमनाम और सुरक्षित रूप से मॉडरेटर को संदेश भेजें।",
+        "featMapTitle": "सार्वजनिक इंटेलिजेंस मैप",
+        "featMapDesc": "लाइव हीटमैप पर भारत भर में भ्रष्टाचार के हॉटस्पॉट देखें।",
+        "featScoreTitle": "राज्य स्कोरबोर्ड",
+        "featScoreDesc": "सभी भारतीय राज्यों में भ्रष्टाचार समाधान दर की तुलना करें।",
+        "featWalletTitle": "रिवॉर्ड वॉलेट",
+        "featWalletDesc": "जब आपकी रिपोर्ट समाधान की ओर ले जाती है, तो पुरस्कार अर्जित करें।",
+        "featMultiTitle": "बहुभाषी समर्थन",
+        "featMultiDesc": "प्लेटफॉर्म का उपयोग अंग्रेजी और हिंदी में करें।",
+        "featVoiceTitle": "वॉयस रिपोर्टिंग",
+        "featVoiceDesc": "अपनी आवाज का उपयोग करके शिकायत दर्ज करें।"
     },
     "dashboard": {
         "title": "नागरिक पोर्टल",
@@ -177,6 +203,11 @@
         "markSafe": "सुरक्षित घोषित करें",
         "failLoad": "रिपोर्ट/निकासी लोड करने में विफल",
         "updateSuccess": "मामला कुशलतापूर्वक अपडेट किया गया।",
+        "exportLogs": "लॉग एक्सपोर्ट करें",
+        "totalReports": "ExposeX मॉडरेशन सेंटर — {{count}} कुल रिपोर्ट",
+        "allIncidents": "सभी घटनाएं",
+        "flaggedIncidents": "फ्लैग की गई घटनाएं",
+        "loading": "लोड हो रहा है...",
         "tabs": {
             "all": "सभी रिपोर्ट",
             "flagged": "फ्लैग हब",
@@ -186,7 +217,9 @@
         "table": {
             "colIdFlags": "आईडी / फ्लैग",
             "colDeptCat": "विभाग और श्रेणी",
+            "colLocation": "स्थान",
             "colStatusEsc": "स्थिति और वृद्धि",
+            "colSeverity": "गंभीरता",
             "colReporter": "रिपोर्टर",
             "colRating": "उपयोगकर्ता रेटिंग",
             "colManage": "प्रबंधन",
@@ -213,6 +246,21 @@
                 "approved": "स्वीकृत",
                 "rejected": "अस्वीकृत"
             }
+        },
+        "caseDetails": {
+            "evidence": "प्रमाण और साक्ष्य",
+            "faceBlurApplied": "फेस ब्लर लागू",
+            "reporterIntelligence": "रिपोर्टर इंटेलिजेंस",
+            "identityProtected": "पहचान सुरक्षित",
+            "verifiedCitizen": "सत्यापित नागरिक",
+            "discussion": "चर्चा",
+            "internalNotes": "आंतरिक नोट्स",
+            "resolve": "समाधान",
+            "legalAdvice": "कानूनी सलाह",
+            "assessmentEngine": "मूल्यांकन इंजन",
+            "applicableSections": "लागू धाराएं",
+            "suggestedProcedure": "सुझाया गया तरीका",
+            "referralAuthority": "रेफरल अथॉरिटी"
         }
     },
     "auth": {
@@ -244,7 +292,12 @@
         "support": "समर्थन",
         "witness": "मैं इसका गवाह हूँ",
         "comments": "टिप्पणियाँ",
+        "commentsTitle": "टिप्पणियाँ",
+        "noComments": "अभी तक कोई टिप्पणी नहीं। पहले बनें!",
         "reportAbuse": "दुरुपयोग की रिपोर्ट करें",
+        "confirmFlag": "क्या आप इस पोस्ट को दुरुपयोग के लिए रिपोर्ट करना चाहते हैं?",
+        "more": "और",
+        "evidenceAttached": "सबूत संलग्न",
         "noReports": "चयनित फ़ीड फ़िल्टर में वर्तमान में कोई रिपोर्ट नहीं मिली।"
     },
     "scoreboard": {
@@ -263,7 +316,14 @@
         "Under Review": "समीक्षा के अधीन",
         "Escalated": "बढ़ाया गया",
         "Resolved": "सुलझाया गया",
-        "Closed": "बंद"
+        "Closed": "बंद",
+        "Verified": "सत्यापित"
+    },
+    "severity": {
+        "low": "कम",
+        "medium": "मध्यम",
+        "high": "उच्च",
+        "critical": "गंभीर"
     },
     "map": {
         "loading": "स्थानिक डेटा का संचयन...",
@@ -284,7 +344,12 @@
         "visualMode": "विज़ुअल मोड",
         "trendingZones": "ट्रेंडिंग ज़ोन",
         "liveIndex": "लाइव भ्रष्टाचार सूचकांक",
-        "aiInsights": "ExposeX एआई अंतर्दृष्टि"
+        "aiInsights": "ExposeX एआई अंतर्दृष्टि",
+        "allDepartments": "सभी विभाग",
+        "allCategories": "सभी श्रेणियां",
+        "analyzing": "सिग्नल का विश्लेषण किया जा रहा है...",
+        "liveAnalysis": "लाइव विश्लेषण सक्रिय",
+        "severity": "गंभीरता"
     },
     "ai": {
         "analyzing": "एआई कानूनी उल्लंघन का विश्लेषण कर रहा है...",

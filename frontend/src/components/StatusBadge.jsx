@@ -7,19 +7,20 @@ const StatusBadge = ({ status }) => {
 
     switch (status) {
         case 'Submitted':
-            colorClass = 'bg-gray-200 text-gray-800';
+            colorClass = 'bg-gray-100 text-gray-700 border-gray-200 dark:bg-slate-800 dark:text-gray-300 dark:border-slate-700';
             break;
         case 'Under Review':
-            colorClass = 'bg-blue-100 text-blue-800 border-blue-200';
+            colorClass = 'bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/40 dark:text-blue-300 dark:border-blue-800';
             break;
         case 'Escalated':
-            colorClass = 'bg-amber-100 text-amber-800 border-amber-200';
+            colorClass = 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-900/40 dark:text-amber-300 dark:border-amber-800';
             break;
         case 'Resolved':
-            colorClass = 'bg-green-100 text-green-800 border-green-200';
+        case 'Verified':
+            colorClass = 'bg-green-50 text-green-700 border-green-200 dark:bg-green-900/40 dark:text-green-300 dark:border-green-800';
             break;
         case 'Closed':
-            colorClass = 'bg-red-100 text-red-800 border-red-200';
+            colorClass = 'bg-red-50 text-red-700 border-red-200 dark:bg-red-900/40 dark:text-red-300 dark:border-red-800';
             break;
         default:
             break;

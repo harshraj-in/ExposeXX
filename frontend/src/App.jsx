@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import Navbar from './components/Navbar';
+import AnimatedBackground from './components/AnimatedBackground';
 import Home from './pages/Home';
 import ReportForm from './pages/ReportForm';
 import AIAdvisor from './pages/AIAdvisor';
@@ -28,11 +30,18 @@ const PageWrapper = ({ children }) => (
   </motion.div>
 );
 
+// Guard: must be logged in (any role)
 const ProtectedRoute = ({ children }) => {
   const { user } = useStore();
-  if (!user) {
-    return <Navigate to="/admin/login" replace />;
-  }
+  if (!user) return <Navigate to="/login" replace />;
+  return children;
+};
+
+// Guard: must be Admin
+const AdminRoute = ({ children }) => {
+  const { user } = useStore();
+  if (!user) return <Navigate to="/admin/login" replace />;
+  if (user.role !== 'Admin') return <Navigate to="/" replace />;
   return children;
 };
 
@@ -55,25 +64,27 @@ const AnimatedRoutes = () => {
         <Route path="/dashboard" element={<ProtectedRoute><PageWrapper><CitizenDashboard /></PageWrapper></ProtectedRoute>} />
         <Route path="/ngo-portal" element={<ProtectedRoute><PageWrapper><NGOPortal /></PageWrapper></ProtectedRoute>} />
         <Route path="/admin/login" element={<PageWrapper><AdminLogin /></PageWrapper>} />
-        <Route 
-          path="/admin/dashboard" 
-          element={
-            <ProtectedRoute>
-              <PageWrapper>
-                <AdminDashboard />
-              </PageWrapper>
-            </ProtectedRoute>
-          } 
-        />
+        <Route path="/admin/dashboard" element={<AdminRoute><PageWrapper><AdminDashboard /></PageWrapper></AdminRoute>} />
       </Routes>
     </AnimatePresence>
   );
 };
 
 function App() {
+  const { theme } = useStore();
+
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [theme]);
+
   return (
     <Router>
-      <div className="min-h-screen flex flex-col font-sans">
+      <div className="min-h-screen flex flex-col font-sans transition-colors duration-300">
+        <AnimatedBackground />
         <Navbar />
         <main className="flex-grow">
           <AnimatedRoutes />

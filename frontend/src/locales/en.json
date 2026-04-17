@@ -8,7 +8,12 @@
         "logout": "Logout",
         "adminLogin": "Admin Login",
         "home": "Home",
-        "scoreboard": "Scoreboard"
+        "scoreboard": "Scoreboard",
+        "switchLanguage": "Switch Language ({{lang}})",
+        "lightMode": "Light Mode",
+        "darkMode": "Dark Mode",
+        "ngoPortal": "NGO Portal",
+        "toggleTheme": "Toggle Theme"
     },
     "home": {
         "heroTitle": "Expose the Truth.",
@@ -33,7 +38,28 @@
         "lokpal": "Lokpal",
         "cbi": "CBI Anti-Corruption",
         "pmoPortal": "Central PMO Portal",
-        "rtiPortal": "RTI Portal"
+        "rtiPortal": "RTI Portal",
+        "featuresTitle": "Everything You Need to Fight Corruption",
+        "featAnonTitle": "Anonymous Reporting",
+        "featAnonDesc": "File complaints without revealing your identity.",
+        "featLegalTitle": "AI Legal Advisor",
+        "featLegalDesc": "Get instant IPC sections and legal steps for your case.",
+        "featEvidenceTitle": "Evidence with Face Blur",
+        "featEvidenceDesc": "Upload photo/video proof with automatic face protection.",
+        "featTrackTitle": "Real-time Tracking",
+        "featTrackDesc": "Track your complaint status with a unique report ID.",
+        "featSafeRoomTitle": "Secure Safe Room Chat",
+        "featSafeRoomDesc": "Message moderators anonymously and securely.",
+        "featMapTitle": "Public Intelligence Map",
+        "featMapDesc": "See corruption hotspots across India on a live heatmap.",
+        "featScoreTitle": "State Scoreboard",
+        "featScoreDesc": "Compare corruption resolution rates across all Indian states.",
+        "featWalletTitle": "Reward Wallet",
+        "featWalletDesc": "Earn rewards when your report leads to a resolved case.",
+        "featMultiTitle": "Multilingual Support",
+        "featMultiDesc": "Use the platform in English and Hindi.",
+        "featVoiceTitle": "Voice Reporting",
+        "featVoiceDesc": "Record your complaint using your voice."
     },
     "dashboard": {
         "title": "Citizen Portal",
@@ -174,9 +200,14 @@
         "subtitle": "Manage civic complaints, escalate matters, and moderate social feed.",
         "allCases": "All Cases",
         "investigate": "Investigate",
-        "markSafe": "Mark as Safe",
+        "markSafe": "Mark Safe",
         "failLoad": "Failed to load reports/withdrawals",
-        "updateSuccess": "Case updated efficiently.",
+        "updateSuccess": "Case updated successfully.",
+        "exportLogs": "Export Logs",
+        "totalReports": "ExposeX Moderation Center — {{count}} total reports",
+        "allIncidents": "All Incidents",
+        "flaggedIncidents": "Flagged Incidents",
+        "loading": "Loading...",
         "tabs": {
             "all": "All Reports",
             "flagged": "Flagged Hub",
@@ -186,10 +217,12 @@
         "table": {
             "colIdFlags": "ID / Flags",
             "colDeptCat": "Dept & Category",
+            "colLocation": "Location",
             "colStatusEsc": "Status & Escalation",
+            "colSeverity": "Severity",
             "colReporter": "Reporter",
             "colRating": "User Rating",
-            "colManage": "Manage",
+            "colManage": "Management",
             "noIncidents": "No incidents currently in this queue.",
             "abuseFlags": "Abuse Flags!",
             "escalatedAuto": "ESCALATED AUTO",
@@ -213,6 +246,21 @@
                 "approved": "Approved",
                 "rejected": "Rejected"
             }
+        },
+        "caseDetails": {
+            "evidence": "Proof & Evidence",
+            "faceBlurApplied": "Face Blur Applied",
+            "reporterIntelligence": "Reporter Intelligence",
+            "identityProtected": "Identity Protected",
+            "verifiedCitizen": "Verified Citizen",
+            "discussion": "Discussion",
+            "internalNotes": "Internal Notes",
+            "resolve": "Resolve",
+            "legalAdvice": "Legal Advice",
+            "assessmentEngine": "Assessment Engine",
+            "applicableSections": "Applicable Sections",
+            "suggestedProcedure": "Suggested Procedure",
+            "referralAuthority": "Referral Authority"
         }
     },
     "auth": {
@@ -244,8 +292,13 @@
         "support": "Support",
         "witness": "I Witnessed This",
         "comments": "Comments",
+        "commentsTitle": "Comments",
+        "noComments": "No comments yet. Be the first!",
         "reportAbuse": "Report Abuse",
-        "noReports": "No reports currently found in the selected feed filter."
+        "confirmFlag": "Report this post for abuse?",
+        "more": "More",
+        "evidenceAttached": "Evidence Attached",
+        "noReports": "No reports found in selected feed filter currently."
     },
     "scoreboard": {
         "title": "State Accountability Scoreboard",
@@ -256,14 +309,22 @@
         "resolved": "Resolved Cases",
         "rate": "Action Rate",
         "primary": "Primary Issue",
-        "resolvedPercent": "Resolved"
+        "resolvedPercent": "Resolved",
+        "noData": "No data available yet."
     },
     "status": {
         "Submitted": "Submitted",
         "Under Review": "Under Review",
         "Escalated": "Escalated",
         "Resolved": "Resolved",
-        "Closed": "Closed"
+        "Closed": "Closed",
+        "Verified": "Verified"
+    },
+    "severity": {
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High",
+        "critical": "Critical"
     },
     "map": {
         "loading": "Aggregating Spatial Vectors...",
@@ -284,7 +345,12 @@
         "visualMode": "Visual Mode",
         "trendingZones": "Trending Zones",
         "liveIndex": "Live Corruption Index",
-        "aiInsights": "ExposeX AI Insights"
+        "aiInsights": "ExposeX AI Insights",
+        "allDepartments": "All Departments",
+        "allCategories": "All Categories",
+        "analyzing": "Analyzing signals...",
+        "liveAnalysis": "LIVE ANALYSIS ACTIVE",
+        "severity": "Severity"
     },
     "ai": {
         "analyzing": "AI Analyzing Legal Violations...",
@@ -308,7 +374,8 @@
         "subtitle": "Access anonymized raw data for civic action, PILs, and investigations.",
         "exportBtn": "Export to CSV",
         "colWitnesses": "Witnesses",
-        "accessRestricted": "Access Restricted: NGO/Journalist authorization required."
+        "accessRestricted": "Access Restricted: NGO/Journalist authorization required.",
+        "noReports": "No reports available to monitor."
     },
     "profile": {
         "title": "My Profile",

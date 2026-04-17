@@ -1,58 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import apiClient from '../api/apiClient';
 import useStore from '../store/useStore';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import StatusBadge from '../components/StatusBadge';
 import { Star, FileText, Loader2, ListOrdered, CheckCircle } from 'lucide-react';
+import { getReports, updateReport } from '../storage';
 
 const MyComplaints = () => {
     const { t } = useTranslation();
-    const { submittedReports } = useStore();
+    const { user } = useStore();
     const [reports, setReports] = useState([]);
     const [loading, setLoading] = useState(true);
-    
-    // Rating State
+
     const [ratingVal, setRatingVal] = useState(5);
     const [ratingFeedback, setRatingFeedback] = useState('');
     const [activeRatingId, setActiveRatingId] = useState(null);
 
     useEffect(() => {
-        const fetchHistory = async () => {
-            if (!submittedReports || submittedReports.length === 0) {
-                setLoading(false);
-                return;
-            }
-            
-            try {
-                // Fetch individually (or create a batch endpoint)
-                const promises = submittedReports.map(id => apiClient.get(`/reports/${id}`));
-                const results = await Promise.allSettled(promises);
-                
-                const validReports = results
-                    .filter(res => res.status === 'fulfilled')
-                    .map(res => res.value.data);
-                
-                setReports(validReports.reverse()); // newest first
-            } catch (err) {
-                console.error(err);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchHistory();
-    }, [submittedReports]);
+        if (!user) { setLoading(false); return; }
+        const all = getReports();
+        const mine = all.filter(r => r.citizenId === user.id);
+        setReports(mine.reverse());
+        setLoading(false);
+    }, [user]);
 
-    const submitRating = async (reportId) => {
+    const submitRating = (reportId) => {
         try {
-            await apiClient.post(`/reports/${reportId}/rate`, {
-                rating: ratingVal,
-                feedback: ratingFeedback
-            });
+            const updated = updateReport(reportId, { rating: ratingVal, ratingFeedback });
+            setReports(prev => prev.map(r => r.reportId === reportId ? { ...r, rating: ratingVal } : r));
             toast.success(t('myComplaints.thankYou'));
             setActiveRatingId(null);
-            // Update local state to hide rating box
-            setReports(prev => prev.map(r => r.reportId === reportId ? { ...r, rating: ratingVal } : r));
         } catch (error) {
             toast.error(t('myComplaints.failRating'));
         }
@@ -60,13 +37,13 @@ const MyComplaints = () => {
 
     return (
         <div className="max-w-5xl mx-auto py-10 px-4">
-            <h1 className="text-3xl font-display font-bold text-cw-navy mb-8 flex items-center">
-                <ListOrdered className="h-8 w-8 mr-3 text-cw-saffron" />
+            <h1 className="text-3xl font-display font-bold text-ex-navy mb-8 flex items-center">
+                <ListOrdered className="h-8 w-8 mr-3 text-ex-cyan" />
                 {t('myComplaints.title')}
             </h1>
 
             {loading ? (
-                <div className="flex justify-center p-20"><Loader2 className="animate-spin text-cw-navy h-8 w-8" /></div>
+                <div className="flex justify-center p-20"><Loader2 className="animate-spin text-ex-navy h-8 w-8" /></div>
             ) : reports.length === 0 ? (
                 <div className="glass-card text-center p-16 text-gray-500">
                     <p>{t('myComplaints.empty')}</p>
@@ -77,36 +54,36 @@ const MyComplaints = () => {
                         <div key={report.reportId} className="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
                             <div className="bg-gray-50 px-6 py-4 border-b border-gray-100 flex justify-between items-center">
                                 <div>
-                                    <h3 className="font-mono font-bold text-lg text-cw-navy">{report.reportId}</h3>
-                                    <span className="text-xs text-gray-500">{t(`report.departments.${report.department}`) || report.department} | {t(`report.categories.${report.category}`) || report.category}</span>
+                                    <h3 className="font-mono font-bold text-lg text-ex-navy">{report.reportId}</h3>
+                                    <span className="text-xs text-gray-500">{report.department} | {report.category}</span>
                                 </div>
                                 <StatusBadge status={report.status} />
                             </div>
-                            
+
                             <div className="p-6">
                                 <h4 className="font-bold flex items-center mb-4 text-gray-700">
                                     <FileText className="h-4 w-4 mr-2" /> {t('myComplaints.timeline')}
                                 </h4>
                                 <div className="space-y-4 pl-2 border-l-2 border-gray-200 ml-2">
-                                    {report.timeline?.map((step, idx) => (
+                                    {(report.timeline || []).map((step, idx) => (
                                         <div key={idx} className="relative pl-6">
-                                            <div className="absolute -left-[23px] top-1 h-3 w-3 bg-cw-saffron rounded-full border-2 border-white"></div>
+                                            <div className="absolute -left-[23px] top-1 h-3 w-3 bg-ex-cyan rounded-full border-2 border-white"></div>
                                             <p className="text-sm font-bold">{step.status}</p>
                                             <p className="text-xs text-gray-600">{step.note}</p>
                                         </div>
                                     ))}
                                 </div>
 
-                                {/* Post Resolution Rating UI */}
-                                {report.status === 'Closed' && !report.rating && (
+                                {/* Rating UI for Resolved reports */}
+                                {report.status === 'Resolved' && !report.rating && (
                                     <div className="mt-8 bg-blue-50 border border-blue-100 p-5 rounded-lg">
                                         <h4 className="font-bold text-blue-900 mb-2">{t('myComplaints.rateResolution')}</h4>
                                         <p className="text-sm text-blue-700 mb-4">{t('myComplaints.rateResolutionNote', { department: report.department })}</p>
-                                        
+
                                         <div className="flex space-x-2 mb-4">
-                                            {[1,2,3,4,5].map(star => (
-                                                <button 
-                                                    key={star} 
+                                            {[1, 2, 3, 4, 5].map(star => (
+                                                <button
+                                                    key={star}
                                                     onClick={() => setRatingVal(star)}
                                                     className={`${star <= ratingVal ? 'text-yellow-400' : 'text-gray-300'} transition cursor-pointer`}
                                                 >
@@ -114,8 +91,8 @@ const MyComplaints = () => {
                                                 </button>
                                             ))}
                                         </div>
-                                        
-                                        <textarea 
+
+                                        <textarea
                                             placeholder={t('myComplaints.feedbackPlaceholder')}
                                             className="input-field mb-3 bg-white"
                                             rows="2"
@@ -132,7 +109,6 @@ const MyComplaints = () => {
                                         <span className="font-medium text-sm">{t('myComplaints.ratedMsg', { rating: report.rating })}</span>
                                     </div>
                                 )}
-
                             </div>
                         </div>
                     ))}

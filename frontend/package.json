@@ -1,7 +1,7 @@
 {
   "name": "exposex",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
-    "axios": "^1.6.8",
     "date-fns": "^3.6.0",
     "framer-motion": "^11.18.2",
     "gsap": "^3.15.0",
@@ -24,7 +23,6 @@
     "react-hook-form": "^7.51.3",
     "react-i18next": "^14.1.0",
     "react-leaflet": "^4.2.1",
-    "react-query": "^3.39.3",
     "react-router-dom": "^6.22.3",
     "react-toastify": "^10.0.5",
     "zod": "^3.23.4",

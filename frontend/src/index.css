@@ -4,32 +4,44 @@
 
 @layer base {
   body {
-    @apply bg-gray-50 text-ex-navy;
+    @apply bg-gray-50 text-ex-navy transition-colors duration-300 dark:bg-slate-950 dark:text-gray-100;
   }
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-display text-ex-navy font-bold leading-tight;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display text-ex-navy font-bold leading-tight dark:text-white;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-ex-cyan text-ex-navy px-6 py-2 rounded-md font-bold hover:bg-cyan-500 transition-colors shadow-md;
+    @apply bg-ex-cyan text-ex-navy px-6 py-2 rounded-md font-bold hover:bg-cyan-500 transition-colors shadow-md dark:bg-ex-cyan/90 dark:hover:bg-ex-cyan;
   }
+
   .btn-secondary {
-    @apply bg-ex-navy text-white px-6 py-2 rounded-md font-medium hover:bg-slate-800 transition-colors shadow-md;
+    @apply bg-ex-navy text-white px-6 py-2 rounded-md font-medium hover:bg-slate-800 transition-colors shadow-md dark:bg-slate-800 dark:hover:bg-slate-700;
   }
+
   .btn-outline {
-    @apply border-2 border-ex-navy text-ex-navy px-6 py-2 rounded-md font-medium hover:bg-ex-navy hover:text-white transition-colors;
+    @apply border-2 border-ex-navy text-ex-navy px-6 py-2 rounded-md font-medium hover:bg-ex-navy hover:text-white transition-colors dark:border-ex-cyan dark:text-ex-cyan dark:hover:bg-ex-cyan dark:hover:text-ex-navy;
   }
+
   .glass-card {
-    @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-xl rounded-xl;
+    @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-xl rounded-xl dark:bg-slate-900/40 dark:border-slate-800/50;
   }
+
   .input-field {
-    @apply w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-ex-cyan focus:border-transparent outline-none transition-all duration-300;
+    @apply w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-ex-cyan focus:border-transparent outline-none transition-all duration-300 dark:bg-slate-800 dark:border-slate-700 dark:text-white dark:focus:ring-ex-cyan/50;
   }
+
   .premium-card-hover {
     @apply transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-ex-cyan/10;
   }
+
   .glow-pulse {
     @apply relative after:absolute after:inset-0 after:rounded-full after:bg-ex-cyan/20 after:animate-ping after:pointer-events-none;
   }
@@ -41,6 +53,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -52,9 +65,17 @@
 }
 
 @keyframes glow-pulse {
-  0% { text-shadow: 0 0 0px rgba(6, 182, 212, 0); }
-  50% { text-shadow: 0 0 15px rgba(6, 182, 212, 0.4); }
-  100% { text-shadow: 0 0 0px rgba(6, 182, 212, 0); }
+  0% {
+    text-shadow: 0 0 0px rgba(6, 182, 212, 0);
+  }
+
+  50% {
+    text-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+  }
+
+  100% {
+    text-shadow: 0 0 0px rgba(6, 182, 212, 0);
+  }
 }
 
 .animate-glow {
@@ -62,12 +83,152 @@
 }
 
 @keyframes marquee {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .leaflet-container {
   width: 100%;
   height: 100%;
   z-index: 10;
+}
+
+/* ============================================================
+   DARK MODE — Plain CSS (guaranteed, bypasses Tailwind layer issues)
+   ============================================================ */
+
+html.dark,
+html.dark body {
+  background-color: #020617 !important;
+  /* slate-950 = near black */
+  color: #e2e8f0 !important;
+  color-scheme: dark;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* All headings */
+html.dark h1,
+html.dark h2,
+html.dark h3,
+html.dark h4,
+html.dark h5,
+html.dark h6 {
+  color: #ffffff !important;
+}
+
+/* White & light backgrounds → deep dark */
+html.dark section,
+html.dark main,
+html.dark div {
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Specific background overrides */
+html.dark .bg-white,
+html.dark .bg-gray-50,
+html.dark .bg-gray-100,
+html.dark .bg-slate-50 {
+  background-color: #0f172a !important;
+  /* slate-900 */
+}
+
+/* Cards */
+html.dark .glass-card,
+html.dark .rounded-xl,
+html.dark .rounded-lg {
+  background-color: #0f172a;
+  border-color: #1e293b;
+}
+
+/* Table backgrounds */
+html.dark table {
+  background-color: #0f172a;
+  color: #e2e8f0;
+}
+
+html.dark th {
+  background-color: #1e293b !important;
+  color: #ffffff !important;
+}
+
+html.dark td {
+  color: #cbd5e1 !important;
+  border-color: #1e293b !important;
+}
+
+html.dark tr:hover {
+  background-color: #1e293b !important;
+}
+
+/* Text overrides */
+html.dark p,
+html.dark span,
+html.dark label,
+html.dark li {
+  color: #cbd5e1;
+}
+
+html.dark .text-gray-500,
+html.dark .text-gray-600,
+html.dark .text-gray-700,
+html.dark .text-gray-800,
+html.dark .text-ex-navy {
+  color: #94a3b8 !important;
+}
+
+/* Borders */
+html.dark .border,
+html.dark .border-gray-100,
+html.dark .border-gray-200,
+html.dark .border-gray-300 {
+  border-color: #1e293b !important;
+}
+
+/* Inputs & selects */
+html.dark input,
+html.dark textarea,
+html.dark select {
+  background-color: #1e293b !important;
+  color: #f1f5f9 !important;
+  border-color: #334155 !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: #64748b !important;
+}
+
+/* Buttons */
+html.dark .btn-outline {
+  border-color: #06b6d4 !important;
+  color: #06b6d4 !important;
+}
+
+/* Shadow cards / panels */
+html.dark .shadow-sm,
+html.dark .shadow-md,
+html.dark .shadow-lg,
+html.dark .shadow-xl {
+  box-shadow: 0 0 0 1px #1e293b, 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Scoreboard / feed / form containers */
+html.dark .max-w-4xl,
+html.dark .max-w-7xl,
+html.dark .max-w-3xl,
+html.dark .max-w-2xl,
+html.dark .max-w-xl,
+html.dark .max-w-lg {
+  background-color: transparent;
+}
+
+/* Toast container stays readable */
+html.dark .Toastify__toast {
+  background-color: #1e293b !important;
+  color: #f1f5f9 !important;
 }

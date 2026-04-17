@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ShieldCheck, LogIn, LogOut, LayoutDashboard, Map, Info, Search, Activity, Languages, Trophy, User, Users, Menu, X } from 'lucide-react';
+import { ShieldCheck, LogIn, LogOut, LayoutDashboard, Map, Info, Search, Activity, Languages, Trophy, User, Users, Menu, X, Sun, Moon } from 'lucide-react';
 import useStore from '../store/useStore';
 import { useTranslation } from 'react-i18next';
 
 const Navbar = () => {
-  const { user, logout } = useStore();
+  const { user, logout, theme, toggleTheme } = useStore();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -29,14 +29,14 @@ const Navbar = () => {
           
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center cursor-pointer" onClick={() => { navigate('/'); setIsMenuOpen(false); }}>
-            <ShieldCheck className="h-8 w-8 text-ex-cyan mr-2" />
-            <span className="font-display font-bold text-xl tracking-wide select-none">
+            <ShieldCheck className="h-7 w-7 md:h-8 md:w-8 text-ex-cyan mr-2" />
+            <span className="font-display font-bold text-lg md:text-xl tracking-wide select-none">
               Expose<span className="text-ex-cyan">X</span>
             </span>
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex flex-1 justify-center space-x-4 items-center text-sm lg:text-base">
+          <div className="hidden md:flex flex-1 justify-center space-x-4 items-center text-sm lg:text-base ml-12">
             <Link to="/feed" className="hover:text-ex-cyan px-3 py-2 rounded-md font-medium flex items-center transition-all hover:scale-105">
               <Activity className="h-4 w-4 mr-1"/> {t('nav.feed')}
             </Link>
@@ -60,6 +60,14 @@ const Navbar = () => {
               <Languages className="h-4 w-4 mr-1"/> {i18n.language.toUpperCase()}
             </button>
 
+            <button 
+              onClick={toggleTheme} 
+              className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-all active:scale-95"
+              title={t('nav.toggleTheme')}
+            >
+              {theme === 'light' ? <Moon className="h-4 w-4 text-ex-cyan" /> : <Sun className="h-4 w-4 text-yellow-400" />}
+            </button>
+
             {user ? (
               <>
                 <Link to={user.role === 'Citizen' ? '/dashboard' : '/admin/dashboard'} className="text-sm bg-white/10 hover:bg-white/20 px-3 py-2 rounded transition flex items-center">
@@ -67,7 +75,7 @@ const Navbar = () => {
                 </Link>
                 {user.role === 'NGO' && (
                   <Link to="/ngo-portal" className="text-sm bg-green-600/20 hover:bg-green-600/40 text-green-300 font-bold px-3 py-2 rounded transition flex items-center">
-                     <Users className="h-4 w-4 mr-1"/> NGO Portal
+                     <Users className="h-4 w-4 mr-1"/> {t('nav.ngoPortal')}
                   </Link>
                 )}
                 <button onClick={handleLogout} className="text-sm bg-red-600 hover:bg-red-700 px-3 py-2 rounded transition flex items-center">
@@ -87,9 +95,12 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Menu Toggle */}
-          <div className="md:hidden flex items-center">
-            <button onClick={toggleMenu} className="text-white hover:text-ex-cyan focus:outline-none transition-colors">
-              {isMenuOpen ? <X className="h-8 w-8" /> : <Menu className="h-8 w-8" />}
+          <div className="md:hidden flex items-center space-x-2">
+            <button onClick={toggleTheme} className="p-2 text-white hover:text-ex-cyan transition-colors">
+              {theme === 'light' ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5 text-yellow-400" />}
+            </button>
+            <button onClick={toggleMenu} className="text-white hover:text-ex-cyan focus:outline-none transition-colors p-1">
+              {isMenuOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
             </button>
           </div>
         </div>
@@ -117,6 +128,20 @@ const Navbar = () => {
           <div className="pt-4 flex flex-col space-y-3">
             <button onClick={toggleLanguage} className="bg-white/10 px-3 py-3 rounded-md font-medium flex justify-center items-center">
               <Languages className="h-5 w-5 mr-2"/> {t('nav.switchLanguage', { lang: i18n.language === 'en' ? 'Hindi' : 'English' })}
+            </button>
+
+            <button onClick={toggleTheme} className="bg-white/10 px-3 py-3 rounded-md font-medium flex justify-center items-center">
+              {theme === 'light' ? (
+                <>
+                  <Moon className="h-5 w-5 mr-2 text-ex-cyan"/>
+                  {t('nav.darkMode')}
+                </>
+              ) : (
+                <>
+                  <Sun className="h-5 w-5 mr-2 text-yellow-400"/>
+                  {t('nav.lightMode')}
+                </>
+              )}
             </button>
             
             {user ? (

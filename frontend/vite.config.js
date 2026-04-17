@@ -9,7 +9,7 @@ export default defineConfig({
     strictPort: false, // fall back to next available port if taken
     proxy: {
       '/api': {
-        target: 'https://exposexx-1.onrender.com',
+        target: 'http://localhost:5000',
         changeOrigin: true,
         secure: false
       }
